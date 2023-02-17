@@ -1,0 +1,35 @@
+packageorg.sporty_shoes.repository;
+
+importorg.hibernate.Query;
+importorg.hibernate.Session;
+importorg.hibernate.Transaction;
+importorg.sporty_shoes.model.Admin;
+importorg.springframework.orm.hibernate5.HibernateTemplate;
+
+@SuppressWarnings("deprecation")
+publicclassRepository {
+
+    privateHibernateTemplatehibernateTemplate;
+
+    publicHibernateTemplategetHibernateTemplate() {
+        returnhibernateTemplate;
+    }
+
+    publicvoidsetHibernateTemplate(HibernateTemplatehibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+    
+    publicbooleanforgotPassword(Stringemail,Stringpassword) {
+        Sessionsession=hibernateTemplate.getSessionFactory().openSession();
+        Transactiontx=session.beginTransaction();  
+        @SuppressWarnings("unchecked")
+        Query<Admin>q=session.createQuery("update Admin set password=:p where email=:e");  
+        q.setParameter("e",email);  
+        q.setParameter("p",password);  
+          
+        intstatus=q.executeUpdate();  
+        System.out.println(status);  
+        tx.commit();  
+        returnstatus>0?true:false;
+    }
+}

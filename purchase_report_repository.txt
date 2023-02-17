@@ -1,0 +1,27 @@
+packageorg.sporty_shoes.repository;
+
+importjava.util.List;
+importorg.sporty_shoes.model.PurchaseReport;
+importorg.springframework.orm.hibernate5.HibernateTemplate;
+
+publicclassPurchaseReportRepository {
+
+    HibernateTemplatehibernateTemplate;
+
+    publicHibernateTemplategetHibernateTemplate() {
+        returnhibernateTemplate;
+    }
+
+    publicvoidsetHibernateTemplate(HibernateTemplatehibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+    
+    @SuppressWarnings("deprecation")
+    publicList<PurchaseReport>getReport(){
+        
+        @SuppressWarnings("unchecked")
+        List<PurchaseReport>report=(List<PurchaseReport>) hibernateTemplate.find("from PurchaseReport order by reportProductName,reportDate");
+        
+        returnreport;
+    }
+}

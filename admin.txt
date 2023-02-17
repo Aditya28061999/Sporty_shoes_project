@@ -1,0 +1,49 @@
+packageorg.sporty_shoes.model;
+
+importjava.io.Serializable;
+importjavax.persistence.Entity;
+importjavax.persistence.Id;
+importjavax.persistence.Table;
+
+@Entity
+
+@Table(name = "admin")
+publicclassAdminimplementsSerializable {
+
+    privatestaticfinallongserialVersionUID = 1L;
+    
+    @Id
+    privateStringemail;
+    privateStringpassword;
+    
+    publicAdmin() {
+        super();
+    }
+
+    publicAdmin(Stringemail, Stringpassword) {
+        super();
+        this.email = email;
+        this.password = password;
+    }
+
+    publicStringgetEmail() {
+        returnemail;
+    }
+
+    publicvoidsetEmail(Stringemail) {
+        this.email = email;
+    }
+
+    publicStringgetPassword() {
+        returnpassword;
+    }
+
+    publicvoidsetPassword(Stringpassword) {
+        this.password = password;
+    }
+
+    @Override
+    publicStringtoString() {
+        returnString.format("Admin [email=%s, password=%s]", email, password);
+    }
+}

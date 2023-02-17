@@ -1,0 +1,110 @@
+packageorg.sporty_shoes.controller;
+
+importorg.sporty_shoes.model.Admin;
+importorg.sporty_shoes.repository.AdminRepository;
+importorg.sporty_shoes.repository.ProductRepository;
+importorg.sporty_shoes.repository.PurchaseReportRepository;
+importorg.sporty_shoes.repository.Repository;
+importorg.sporty_shoes.repository.UserRepository;
+importorg.springframework.beans.factory.annotation.Autowired;
+importorg.springframework.stereotype.Controller;
+importorg.springframework.ui.ModelMap;
+importorg.springframework.web.bind.annotation.RequestMapping;
+importorg.springframework.web.bind.annotation.RequestMethod;
+importorg.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+publicclassMyController {
+    
+    @Autowired
+    AdminRepositoryadminRepository;
+    @Autowired
+    ProductRepositoryproductRepository;
+    @Autowired
+    UserRepository  userRepository;
+    @Autowired
+    PurchaseReportRepositorypurchaseReportRepository;
+    @Autowired
+    Repositoryrepository;
+
+    @RequestMapping("/")
+    publicStringshowHome() {
+        return"Home";
+    }
+    
+    @RequestMapping(value="adminLogin",method =RequestMethod.GET)
+    publicStringadminLoginPage() {
+        return"AdminLogin";
+    }
+    
+    @RequestMapping(value="forgotPassword",method =RequestMethod.GET)
+    publicStringforgotPassword() {
+        return"ForgotPassword";
+    }
+    
+    @RequestMapping(value="adminForgotPassword",method =RequestMethod.POST)
+    publicStringadminForgotPasswordPage(@RequestParam("email")Stringemail,
+            @RequestParam("password")Stringpassword,ModelMapmap) {
+        
+        if(repository.forgotPassword(email,password))
+            map.addAttribute("message","Password Updated");
+        else
+            map.addAttribute("message","Invalid Details");
+        
+        return"ForgotPassword";
+    }
+    
+    
+    @RequestMapping(value="adminPage",method=RequestMethod.POST)
+    publicStringadminPage(@RequestParam(name="email")Stringemail,
+            @RequestParam(name="password")Stringpassword,ModelMapmap) {
+        
+        if(adminRepository.verifyAdmin(newAdmin(email,password)))
+            return"AdminPage";
+        else {
+            map.addAttribute("message", "Invalid Details");
+            return"AdminLogin";
+        }   
+    }
+    
+    @RequestMapping(value="product",method=RequestMethod.GET)
+    publicStringgetAllProducts(ModelMapmap) {
+        
+        map.addAttribute("productList",productRepository.getAllProducts());
+        return"Product";   
+    }
+    
+    @RequestMapping(value="user",method=RequestMethod.GET)
+    publicStringgetAllUsers(ModelMapmap) {
+        
+        map.addAttribute("userList",userRepository.getAllUsers());
+        return"User";  
+    }
+    
+    @RequestMapping(value="searchUser",method=RequestMethod.GET)
+    publicStringsearchUser(@RequestParam("email")Stringemail,ModelMapmap) {
+        
+        map.addAttribute("userList",userRepository.searchUser(email));
+        return"User";  
+    }
+    
+    @RequestMapping(value="purchaseReport",method=RequestMethod.GET)
+    publicStringgetRport(ModelMapmap) {
+        
+        map.addAttribute("report",purchaseReportRepository.getReport());
+        return"PurchaseReport";    
+    }
+    
+    @RequestMapping(value="deleteProduct",method=RequestMethod.GET)
+    publicStringdeleteProduct(@RequestParam("id")intid,ModelMapmap) {
+        
+        if(productRepository.deleteProduct(id))
+            map.addAttribute("message","Product Deleted Successfully");
+        else
+            map.addAttribute("message","Try after few minutes");
+        map.addAttribute("productList",productRepository.getAllProducts());
+        
+        return"Product";   
+    }
+}
+

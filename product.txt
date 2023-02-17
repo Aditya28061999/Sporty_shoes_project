@@ -1,0 +1,73 @@
+packageorg.sporty_shoes.model;
+
+importjava.io.Serializable;
+importjavax.persistence.Entity;
+importjavax.persistence.GeneratedValue;
+importjavax.persistence.GenerationType;
+importjavax.persistence.Id;
+importjavax.persistence.Table;
+
+@Entity
+
+@Table(name="product")
+publicclassProductimplementsSerializable{
+    
+    privatestaticfinallongserialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    privateintproductId;
+    privateStringproductName;
+    privateintproductPrice;
+    privateStringproductDiscription;
+    
+    publicProduct() {
+        super();
+    }
+
+    publicProduct(StringproductName, intproductPrice, StringproductDiscription) {
+        super();
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productDiscription = productDiscription;
+    }
+
+    publicintgetProductId() {
+        returnproductId;
+    }
+
+    publicvoidsetProductId(intproductId) {
+        this.productId = productId;
+    }
+
+    publicStringgetProductName() {
+        returnproductName;
+    }
+
+    publicvoidsetProductName(StringproductName) {
+        this.productName = productName;
+    }
+
+    publicintgetProductPrice() {
+        returnproductPrice;
+    }
+
+    publicvoidsetProductPrice(intproductPrice) {
+        this.productPrice = productPrice;
+    }
+
+    publicStringgetProductDiscription() {
+        returnproductDiscription;
+    }
+
+    publicvoidsetProductDiscription(StringproductDiscription) {
+        this.productDiscription = productDiscription;
+    }
+
+    @Override
+    publicStringtoString() {
+        returnString.format("Product [productId=%s, productName=%s, productprice=%s, productDiscription=%s]",
+                productId, productName, productPrice, productDiscription);
+    }   
+}
+

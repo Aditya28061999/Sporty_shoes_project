@@ -1,0 +1,97 @@
+packageorg.sporty_shoes.model;
+
+importjava.io.Serializable;
+importjavax.persistence.Entity;
+importjavax.persistence.GeneratedValue;
+importjavax.persistence.GenerationType;
+importjavax.persistence.Id;
+importjavax.persistence.Table;
+
+@Entity
+
+@Table(name="user")
+publicclassUserimplementsSerializable {
+
+    privatestaticfinallongserialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    privateintuserId;
+    privateStringuserName;
+    privateStringuserEmail;
+    privateintuserAge;
+    privateStringuserGender;
+    privateStringuserAddress;
+    
+    publicUser() {
+        super();
+    }
+
+    publicUser(StringuserName, StringuserEmail, intuserAge, StringuserGender, StringuserAddress) {
+        super();
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userAge = userAge;
+        this.userGender = userGender;
+        this.userAddress = userAddress;
+    }
+
+    publicintgetUserId() {
+        returnuserId;
+    }
+
+    publicvoidsetUserId(intuserId) {
+        this.userId = userId;
+    }
+
+    publicStringgetUserName() {
+        returnuserName;
+    }
+
+    publicvoidsetUserName(StringuserName) {
+        this.userName = userName;
+    }
+
+    publicStringgetUserEmail() {
+        returnuserEmail;
+    }
+
+    publicvoidsetUserEmail(StringuserEmail) {
+        this.userEmail = userEmail;
+    }
+
+    publicintgetUserAge() {
+        returnuserAge;
+    }
+
+    publicvoidsetUserAge(intuserAge) {
+        this.userAge = userAge;
+    }
+
+    publicStringgetUserGender() {
+        returnuserGender;
+    }
+
+    publicvoidsetUserGender(StringuserGender) {
+        this.userGender = userGender;
+    }
+
+    publicStringgetUserAddress() {
+        returnuserAddress;
+    }
+
+    publicvoidsetUserAddress(StringuserAddress) {
+        this.userAddress = userAddress;
+    }
+
+    publicstaticlonggetSerialversionuid() {
+        returnserialVersionUID;
+    }
+
+    @Override
+    publicStringtoString() {
+        returnString.format("User [userId=%s, userName=%s, userEmail=%s, userAge=%s, userGender=%s, userAddress=%s]",
+                userId, userName, userEmail, userAge, userGender, userAddress);
+    }
+}
+

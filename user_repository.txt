@@ -1,0 +1,50 @@
+packageorg.sporty_shoes.repository;
+
+importjava.util.List;
+importorg.hibernate.Query;
+importorg.hibernate.Session;
+importorg.hibernate.Transaction;
+importorg.sporty_shoes.model.User;
+importorg.springframework.orm.hibernate5.HibernateTemplate;
+
+@SuppressWarnings("deprecation")
+publicclassUserRepository {
+    
+    HibernateTemplatehibernateTemplate;
+    
+    publicUserRepository() {
+        super();
+    }
+    publicUserRepository(HibernateTemplatehibernateTemplate) {
+        super();
+        this.hibernateTemplate = hibernateTemplate;
+    }
+    publicHibernateTemplategetHibernateTemplate() {
+        returnhibernateTemplate;
+    }
+
+    publicvoidsetHibernateTemplate(HibernateTemplatehibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+    
+    publicList<User>getAllUsers(){
+        
+        List<User>userList=hibernateTemplate.loadAll(User.class);
+        returnuserList;
+        
+    }
+    publicList<User>searchUser(Stringemail){
+        
+        Sessionsession=hibernateTemplate.getSessionFactory().openSession();
+        Transactiontransaction=session.beginTransaction();
+        
+        Stringhql = "from User where userEmail=:email";
+        Query<User>query = session.createQuery(hql,User.class);
+        query.setParameter("email", email);
+        List<User>user = query.getResultList();
+        transaction.commit();
+        session.close();
+        
+        returnuser;
+    }
+}

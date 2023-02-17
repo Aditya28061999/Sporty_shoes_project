@@ -1,0 +1,93 @@
+packageorg.sporty_shoes.repository;
+
+importjava.util.List;
+importorg.hibernate.Query;
+importorg.hibernate.Session;
+importorg.hibernate.Transaction;
+importorg.sporty_shoes.model.Admin;
+importorg.springframework.orm.hibernate5.HibernateTemplate;
+
+@SuppressWarnings("deprecation")
+publicclassAdminRepository {
+
+    
+    privateHibernateTemplatehibernateTemplate;
+
+    publicHibernateTemplategetHibernateTemplate() {
+        returnhibernateTemplate;
+    }
+
+    publicvoidsetHibernateTemplate(HibernateTemplatehibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+
+    publicbooleanverifyAdmin(Admina) {
+        Sessionsession=hibernateTemplate.getSessionFactory().openSession();
+        Transactiontransaction=session.beginTransaction();
+        
+        Stringhql = "from Admin where email=:email and password=:password";
+        Query<Admin>query = session.createQuery(hql,Admin.class);
+        query.setParameter("email", a.getEmail());
+        query.setParameter("password", a.getPassword());
+        List<Admin>results = query.getResultList();
+        transaction.commit();
+        session.close();
+        
+        returnresults.size()>0;    
+    }
+}
+
+ 
+ProductRepository.java
+packageorg.sporty_shoes.repository;
+
+importjava.util.List;
+importorg.hibernate.Session;
+importorg.hibernate.Transaction;
+importorg.sporty_shoes.model.Product;
+importorg.springframework.orm.hibernate5.HibernateTemplate;
+
+publicclassProductRepository {
+    
+    HibernateTemplatehibernateTemplate;
+    
+    publicProductRepository() {
+        super();
+    }
+
+    publicProductRepository(HibernateTemplatehibernateTemplate) {
+        super();
+        this.hibernateTemplate = hibernateTemplate;
+    }
+
+    publicHibernateTemplategetHibernateTemplate() {
+        returnhibernateTemplate;
+    }
+
+    publicvoidsetHibernateTemplate(HibernateTemplatehibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+    
+    publicList<Product>getAllProducts(){
+        
+        List<Product>productList=hibernateTemplate.loadAll(Product.class);
+        returnproductList;
+        
+    }
+    
+    publicBooleandeleteProduct(intid) {
+        
+        try {
+        Sessionsession=hibernateTemplate.getSessionFactory().openSession();
+        Transactiontransaction=session.beginTransaction();
+        Productp=session.get(Product.class, id);
+        session.delete(p);
+        transaction.commit();
+        session.close();
+        }
+        catch(Exceptione) {
+            returnfalse;
+        }
+        returntrue;
+    }
+}

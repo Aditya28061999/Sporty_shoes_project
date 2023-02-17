@@ -1,0 +1,86 @@
+packageorg.sporty_shoes.model;
+
+importjava.io.Serializable;
+importjavax.persistence.Entity;
+importjavax.persistence.GeneratedValue;
+importjavax.persistence.GenerationType;
+importjavax.persistence.Id;
+importjavax.persistence.Table;
+
+@Entity
+@Table(name="purchase_report")
+publicclassPurchaseReportimplementsSerializable {
+
+    privatestaticfinallongserialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    privateintreportId;
+    privateStringreportProductName;
+    privateStringreportUserEmail;
+    privateStringreportDate;
+    privateintreportPrice;
+    
+    publicPurchaseReport() {
+        super();
+    }
+
+    publicPurchaseReport(StringreportProductName, StringreportUserEmail, StringreportDate, intreportPrice) {
+        super();
+        this.reportProductName = reportProductName;
+        this.reportUserEmail = reportUserEmail;
+        this.reportDate = reportDate;
+        this.reportPrice = reportPrice;
+    }
+
+    publicintgetReportId() {
+        returnreportId;
+    }
+
+    publicvoidsetReportId(intreportId) {
+        this.reportId = reportId;
+    }
+
+    publicStringgetReportProductName() {
+        returnreportProductName;
+    }
+
+    publicvoidsetReportProductName(StringreportProductName) {
+        this.reportProductName = reportProductName;
+    }
+
+    publicStringgetReportUserEmail() {
+        returnreportUserEmail;
+    }
+
+    publicvoidsetReportUserEmail(StringreportUserEmail) {
+        this.reportUserEmail = reportUserEmail;
+    }
+
+    publicStringgetReportDate() {
+        returnreportDate;
+    }
+
+    publicvoidsetReportDate(StringreportDate) {
+        this.reportDate = reportDate;
+    }
+
+    publicintgetReportPrice() {
+        returnreportPrice;
+    }
+
+    publicvoidsetReportPrice(intreportPrice) {
+        this.reportPrice = reportPrice;
+    }
+
+    publicstaticlonggetSerialversionuid() {
+        returnserialVersionUID;
+    }
+
+    @Override
+    publicStringtoString() {
+        returnString.format(
+                "PurchaseReport [reportId=%s, reportProductName=%s, reportUserEmail=%s, reportDate=%s, reportPrice=%s]",
+                reportId, reportProductName, reportUserEmail, reportDate, reportPrice);
+    }
+}
